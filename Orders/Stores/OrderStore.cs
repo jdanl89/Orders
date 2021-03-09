@@ -57,21 +57,19 @@ namespace Orders.Stores
             int skip = (options.PageNumber - 1) * options.PageSize;
             int take = options.PageSize;
 
-            if (string.IsNullOrWhiteSpace(options.SearchText))
+            IEnumerable<Order> filteredOrders = this.Orders;
+
+            if (!options.IncludeCanceled)
             {
-                return this.Orders
-                    .OrderBy(o => o.OrderId)
-                    .Skip(skip)
-                    .Take(take)
-                    .ToList();
+                filteredOrders = filteredOrders.Where(o => o.Status == Status.Active);
             }
 
-            return this.Orders
-                .Where(o => o.Description.Contains(options.SearchText, StringComparison.InvariantCultureIgnoreCase))
-                .OrderBy(o => o.OrderId)
-                .Skip(skip)
-                .Take(take)
-                .ToList();
+            if (!string.IsNullOrWhiteSpace(options.SearchText))
+            {
+                filteredOrders = filteredOrders.Where(o => o.Description.Contains(options.SearchText, StringComparison.OrdinalIgnoreCase));
+            }
+
+            return filteredOrders.OrderBy(o => o.OrderId).Skip(skip).Take(take).ToList();
         }
     }
 }

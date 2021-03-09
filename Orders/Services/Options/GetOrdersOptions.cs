@@ -10,6 +10,11 @@ namespace Orders.Services.Options
     public class GetOrdersOptions
     {
         /// <summary>
+        /// Gets or sets a value indicating whether to include canceled orders.
+        /// </summary>
+        public bool IncludeCanceled { get; set; } = true;
+
+        /// <summary>
         /// Gets or sets the page number.
         /// </summary>
         public int PageNumber { get; set; } = 1;

@@ -19,6 +19,7 @@ namespace Orders.DTOs
         {
             this.OrderId = order.OrderId;
             this.Description = order.Description;
+            this.Status = order.Status.ToString();
         }
 
         /// <summary>
@@ -30,5 +31,10 @@ namespace Orders.DTOs
         /// Gets or sets the ID of the order.
         /// </summary>
         public int? OrderId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the order status.
+        /// </summary>
+        public string Status { get; set; }
     }
 }
