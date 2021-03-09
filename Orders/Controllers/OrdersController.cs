@@ -54,10 +54,14 @@ namespace Orders.Controllers
             try
             {
                 this._orderService.CancelOrder(orderId);
+
+                this._logger.LogInformation("Canceled order successfully.", orderId);
+
                 return this.Ok($"Order {orderId} canceled successfully.");
             }
             catch (ArgumentException ex)
             {
+                this._logger.LogWarning("Failed to cancel order.", orderId);
                 return this.BadRequest(ex.Message);
             }
         }
@@ -76,14 +80,17 @@ namespace Orders.Controllers
                 return this.BadRequest("The request object cannot be null.");
             }
 
-            this._logger.LogInformation("Creating Order.", model);
-
             if (!this.ModelState.IsValid)
             {
                 return this.BadRequest(this.ModelState);
             }
 
+            this._logger.LogInformation("Creating Order.", model);
+
             OrderDetailDto order = this._orderService.CreateOrder(model);
+
+            this._logger.LogInformation("Order created successfully.", order);
+
             return this.Ok(order);
         }
 
@@ -139,11 +146,16 @@ namespace Orders.Controllers
 
             try
             {
+                this._logger.LogInformation("Updating order.", model, orderId);
+
                 OrderDetailDto order = this._orderService.UpdateOrder(model);
+
+                this._logger.LogInformation("Updated order successfully.", order);
                 return this.Ok(order);
             }
             catch (ArgumentException ex)
             {
+                this._logger.LogWarning("Failed to update order.", model, orderId);
                 return this.BadRequest(ex.Message);
             }
         }

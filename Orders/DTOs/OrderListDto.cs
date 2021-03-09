@@ -14,6 +14,13 @@ namespace Orders.DTOs
         /// <summary>
         /// Initializes a new instance of the <see cref="OrderListDto"/> class.
         /// </summary>
+        public OrderListDto()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrderListDto"/> class.
+        /// </summary>
         /// <param name="order">The order.</param>
         public OrderListDto(Order order)
         {

@@ -52,8 +52,10 @@ namespace Orders.Stores
         /// </summary>
         /// <param name="options">The optional parameters for filtering the results.</param>
         /// <returns>The filtered list of orders.</returns>
-        public List<Order> GetOrders(GetOrdersOptions options)
+        public List<Order> GetOrders(GetOrdersOptions options = null)
         {
+            options ??= new GetOrdersOptions();
+
             int skip = (options.PageNumber - 1) * options.PageSize;
             int take = options.PageSize;
 

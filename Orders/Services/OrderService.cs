@@ -42,7 +42,7 @@ namespace Orders.Services
 
             if (order == null)
             {
-                throw new ArgumentException("No order found with given OrderId.");
+                throw new ArgumentException("No order found with given OrderId.", nameof(orderId));
             }
 
             // Note that since this is a reference type, there is no need to call any further store-level methods.
@@ -95,7 +95,7 @@ namespace Orders.Services
 
             if (order == null)
             {
-                throw new ArgumentException("No Order found with the given OrderId.");
+                throw new ArgumentException("No order found with given OrderId.");
             }
 
             // Note that since this is a reference type, there is no need to call any further store-level methods.

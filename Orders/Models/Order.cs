@@ -15,6 +15,13 @@ namespace Orders.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="Order"/> class.
         /// </summary>
+        public Order()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Order"/> class.
+        /// </summary>
         /// <param name="model">The model to be converted from DTO to data model.</param>
         public Order(OrderCreateDto model)
         {
